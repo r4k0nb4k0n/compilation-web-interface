@@ -3,17 +3,17 @@
 * 이태희
 * 최형진
 ## TODO List
-1. 1단계 : 세상에서 가장 간단한 웹 컴파일러 만들기
+1. **1단계 : 세상에서 가장 간단한 웹 컴파일러 만들기**
 	1. 코드 입력받을 텍스트 박스와 컴파일 버튼 생성
 	2. PHP에서 쉘 코드(C언어 컴파일 코드) 실행
 	3. 컴파일 및 실행 결과를 출력
-2. 2단계 : 표준입출력 및 다양한 언어 지원
+2. **2단계 : 표준입출력 및 다양한 언어 지원**
 	1. stdin 받을 텍스트 박스와 stdout 뱉을 텍스트 박스 생성
 	2. g++, java, php 등 다른 언어 선택할 수 있는 리스트박스 생성
-3. 3단계 : Sandboxing과 Code Highlighter 적용
+3. **3단계 : Sandboxing과 Code Highlighter 적용**
 	1. Sandboxing using Docker
 	2. Code highlighting using CodeMirror
-4. 4단계 : 희망사항(**절대 하지 말자**)
+4. 4단계 : 희망사항(**시간 나면 하자**)
 	1. 계정 기능
 	2. 디버깅 기능
 	3. VM 콘솔 기능
