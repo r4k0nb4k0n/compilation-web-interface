@@ -1,4 +1,5 @@
 # 2017-2 Internet Programming Team Project : Web Compiler
+## Contributor
 * 서예찬
 * 이태희
 * 최형진
@@ -22,3 +23,6 @@
 * [How to build an web compiler](http://hashcode.co.kr/questions/3530/%EC%9B%B9-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
 * 악의적인 코드를 막기 위한 Sandboxing => [Easy deploy with Docker](http://blog.nacyot.com/articles/2014-01-27-easy-deploy-with-docker/)
 * 코드를 예쁘게 보여주는 Code Highlighter => [CodeMirror](http://codemirror.net/index.html)
+
+## License
+MIT License
