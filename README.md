@@ -20,6 +20,7 @@
 	1. stdin 받을 텍스트 박스와 stdout 뱉을 텍스트 박스 생성
 		* [HTML textarea tag](https://www.w3schools.com/tags/tag_textarea.asp)
 	2. g++, java, php 등 다른 언어 선택할 수 있는 리스트박스 생성
+	3. 각 언어들의 컴파일 및 실행 코드 입력
 3. **3단계 : Sandboxing과 Code Highlighter 적용**
 	1. Sandboxing using Docker
 	2. Code highlighting using CodeMirror
