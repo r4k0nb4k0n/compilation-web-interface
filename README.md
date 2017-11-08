@@ -1,8 +1,9 @@
 # 2017-2 Internet Programming Team Project : Web Compiler
 ## Contributor
-* 서예찬
-* 이태희
-* 최형진
+* 2016920020 서예찬
+* 2016920041 이태희
+* 2016920060 최형진
+
 ## TODO List
 1. **1단계 : 세상에서 가장 간단한 웹 컴파일러 만들기**
 	1. 코드 입력받을 텍스트 박스와 컴파일 버튼 생성
