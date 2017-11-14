@@ -12,25 +12,23 @@
 
 ## TODO List
 1. **1단계 : 세상에서 가장 간단한 웹 컴파일러 만들기**
-	1. 코드 입력받을 텍스트 박스와 컴파일 버튼 생성
+	1. 코드 입력받을 텍스트 박스와 컴파일 버튼 생성. Code Highlighter 적용.
 		* [HTML textarea tag](https://www.w3schools.com/tags/tag_textarea.asp)
 		* [HTML Forms](https://www.w3schools.com/html/html_forms.asp)
 		* [PHP Form](https://www.w3schools.com/php/php_forms.asp)
+		* [CodeMirror](http://codemirror.net/index.html)
 	2. PHP에서 쉘 코드(C언어 컴파일 코드) 실행
 		* [How to compile & execute C program on Linux](http://www.codecoffee.com/tipsforlinux/articles/18.html)
 	3. 컴파일 및 실행 결과를 출력
 		* [PHP: 실행 연산자](http://php.net/manual/kr/language.operators.execution.php)
 		* [PHP: shell_exec](http://php.net/manual/kr/function.shell-exec.php)
 		
-2. **2단계 : 표준입출력 및 다양한 언어 지원**
+2. **2단계 : 표준입출력**
 	1. stdin 받을 텍스트 박스와 stdout 뱉을 텍스트 박스 생성
 		* [HTML textarea tag](https://www.w3schools.com/tags/tag_textarea.asp)
-	2. g++, java, php 등 다른 언어 선택할 수 있는 리스트박스 생성
-	3. 각 언어들의 컴파일 및 실행 코드 입력
-3. **3단계 : Sandboxing과 Code Highlighter 적용**
+3. **3단계 : Sandboxing**
 	1. Sandboxing using Docker
-	2. Code highlighting using CodeMirror
-4. 4단계 : From Web Compiler to Web IDE (**시간 나면 하자**)
+4. **4단계 : From Web Compiler to Web IDE** (**시간 나면 하자**)
 	1. 계정 기능
 	2. 디버깅 기능
 	3. VM 콘솔 기능
