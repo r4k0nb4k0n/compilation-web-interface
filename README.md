@@ -1,8 +1,14 @@
 # 2017-2 Internet Programming Team Project : Web Compiler
-## Contributor
+## Collaborator
 * 2016920020 서예찬
 * 2016920041 이태희
 * 2016920060 최형진
+
+## Proposal(2017/11/14) Discussion
+* Web Compiler가 아니라 정확히 말하면 Compiler Web Interface.
+* 기존 사례들을 조사. 
+	* 이들을 모방?
+	* 특정 기능 구현? 개선?
 
 ## TODO List
 1. **1단계 : 세상에서 가장 간단한 웹 컴파일러 만들기**
