@@ -10,31 +10,33 @@
 	<title>Web Compiler</title>
 </head>
 <body>
-	<h1>Web Compiler</h1>
-	
 	<?php
 		$codeErr = "";
-		$result = "";
+		$stdout = "";
 		$error = "";
-		$myfile = fopen("./src.c", "w+") or die("Unable to open file!");
+		$src = fopen("./src.c", "w+") or die("Unable to open file!");
+		$in = fopen("./in.txt", "w+") or die("Unable to open file!");
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
   			if (empty($_POST["editor"])) {
     			$codeErr = "Code is required";
   			} 
 			else {
-    			fwrite($myfile, $_POST["editor"]);
-				fclose($myfile);
+    			fwrite($src, $_POST["editor"]); fwrite($in, $_POST["stdin"]);
+				fclose($src); fclose($in);
 				$error = shell_exec("gcc -o prog src.c 2>&1");
-				$result = shell_exec("./prog");
+				$stdout = shell_exec("./prog < in.txt");
+				shell_exec("rm ./prog");
 			}
 		}
-		fclose($myfile);
+		fclose($src); fclose($in);
 	?>
+	<h1>Web Compiler</h1>
 	
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-		Code:
-		<br> 
-			<textarea id="editor" name="editor"></textarea>
+		<h2>CODE</h2>
+		<textarea id="editor" name="editor"></textarea>
+		<h2>STDIN</h2>
+		<textarea id="stdin" name="stdin"></textarea>
 		<br>
 		<input type="submit" name="submit" value="컴파일 및 실행">
 	</form>
@@ -43,18 +45,13 @@
 	<h1>
 		Compile
 	</h1>
-	<?php
-		echo $error."<br>";
-		echo $_POST["code"];
-	?>
+	<textarea id="compile" name="compile"><?php echo $error;?></textarea>
 	
 	<!-- Print the stdout of the program -->
 	<h1>
-		Result
+		stdout
 	</h1>
-	<?php
-		echo $result;
-	?>
+	<textarea id="stdout" name="stdout"><?php echo $stdout;?></textarea>
 </body>
 </html>
 
@@ -67,6 +64,24 @@
 		smartIndent: true,
 		mode: "c++",
     	theme: "solarized dark",
+		val: textarea.value
+	});
+	var textareain = document.getElementById('stdin');
+	var stdin = CodeMirror.fromTextArea(textareain, {
+    	lineNumbers: true,
+   		lineWrapping: true,
+		val: textarea.value
+	});
+	var textareaerr = document.getElementById('compile');
+	var compile = CodeMirror.fromTextArea(textareaerr, {
+    	lineNumbers: true,
+   		lineWrapping: true,
+		val: textarea.value
+	});
+	var textareaout = document.getElementById('stdout');
+	var stdout = CodeMirror.fromTextArea(textareaout, {
+    	lineNumbers: true,
+   		lineWrapping: true,
 		val: textarea.value
 	});
 </script>
