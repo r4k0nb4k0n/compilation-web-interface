@@ -40,7 +40,7 @@
 	?>
 	
 	<header class="w3-container w3-teal">
-  		<h1>Web Compilation Interface</h1>
+  		<h1>Compilation Web sInterface</h1>
 	</header>
 	
 	<div class="w3-cell-row">
