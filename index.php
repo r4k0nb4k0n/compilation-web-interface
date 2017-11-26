@@ -40,13 +40,13 @@
 	?>
 	
 	<header class="w3-container w3-teal">
-  		<h1>Compilation Web sInterface</h1>
+  		<h1>Compilation Web Interface</h1>
 	</header>
 	
 	<div class="w3-cell-row">
 		<div class="w3-container w3-cell">
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-			<p>	
+			<p><!-- The Code Editor using codemirror -->	
 				<h3>CODE</h3>
 				<textarea autofocus id="editor" name="editor"><?php echo $src;?></textarea>
 			</p>
@@ -62,7 +62,7 @@
 
 		<div class="w3-container w3-cell">
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
- 			<p>
+ 			<p><!-- Write the stdin of the program -->
 				<h3>STDIN</h3>
 				<textarea id="stdin" name="stdin"><?php echo $stdin;?></textarea>
 			</p>
