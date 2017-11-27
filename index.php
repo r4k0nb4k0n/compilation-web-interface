@@ -28,6 +28,7 @@
     				fwrite($src, $_POST["editor"]);
 					fclose($src); 
 					$error = shell_exec("gcc -o prog src.c 2>&1");
+					$code=shell_exec("cat src.c");
 				}
 			}
   			else if(isset($_POST["execute"])){
@@ -45,10 +46,10 @@
 	
 	<div class="w3-cell-row">
 		<div class="w3-container w3-cell">
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 			<p><!-- The Code Editor using codemirror -->	
 				<h3>CODE</h3>
-				<textarea autofocus id="editor" name="editor"><?php echo $src;?></textarea>
+				<textarea autofocus id="editor" name="editor"><?php echo $code;?></textarea>
 			</p>
 			<p><!-- Print the status of the compilation -->
 				<h3>Status</h3>
@@ -60,7 +61,7 @@
 			</form>
 		</div>	
 
-		<div class="w3-container w3-cell">
+		<div class="`w3-container w3-cell">
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
  			<p><!-- Write the stdin of the program -->
 				<h3>STDIN</h3>
