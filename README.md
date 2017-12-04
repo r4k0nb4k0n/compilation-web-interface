@@ -26,15 +26,12 @@
 	* 개선 사항
 		* 사이트 첫 방문시 모든 것이 초기화 상태(빈 파일)이어야 한다.
 		* 초기화 버튼 만들기
-		* 코드 작성 및 컴파일 후에 에디터 안에 코드가 남아있어야 한다. (이태희, 2017/11/27)
-		* 입력 작성 및 실행 후에도 입력 안에 데이터가 남아있어야 한다.
-2. **2단계 : 새로고침을 줄이자**
-	1. AJAX
-		* [PHP-AJAX](https://www.w3schools.com/php/php_ajax_intro.asp)
-3. **3단계 : 보안 기능 추가**
+		* ~~코드 작성 및 컴파일 후에 에디터 안에 코드가 남아있어야 한다.~~ (이태희, 2017/11/27)
+		* ~~입력 작성 및 실행 후에도 입력 안에 데이터가 남아있어야 한다.~~
+2. **2단계 : 보안 기능 추가**
 	1. Sandboxing using Docker
 		* [Easy deploy with Docker](http://blog.nacyot.com/articles/2014-01-27-easy-deploy-with-docker/)
-4. **4단계 : From Web Compiler to Web IDE** (**시간 나면 하자**)
+3. **3단계 : From Web Compiler to Web IDE** (**시간 나면 하자**)
 	1. 계정 기능
 	2. 디버깅 기능
 	3. VM 콘솔 기능
