@@ -1,3 +1,14 @@
+<?php 
+	session_start();
+	$cwd = "./sessions/".session_id()."/";
+	$time = 60 * 10; // 10 minutes only.
+	if (!isset($_SESSION['EXPIRES']) || $_SESSION['EXPIRES'] < time()+$time) {
+		shell_exec("rm ".$cwd."*");
+    	session_destroy();
+    	$_SESSION = array();
+	}
+	$_SESSION['EXPIRES'] = time() + $time;
+?>
 <meta charset="utf-8"/>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,82 +23,84 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<title>C Compiler Web Interface</title>
 </head>
-<body>
-	<?php
-		$stdout = "";
-		$error = "";
-		
-		shell_exec("rm in.txt"); // clear in.txt when you first execute
+	<?PHP
+		shell_exec("mkdir ./sessions/".session_id()); // 세션의 고유 ID을 이름으로 하는 디렉토리 생성
+	
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			shell_exec("rm src.c");
-			if (isset($_POST["compile"])){
+			// Execute the program when compilation is successfully done.
+			$_SESSION[code] = $_POST["editor"];
+			$_SESSION[stdin] = $_POST["stdin"];
+			if (isset($_POST["execute"])){
 				if (empty($_POST["editor"])) {
-    				$codeErr = "Code is required";
+    				$_SESSION[status] = "Code is required.";
   				} 
 				else {
-					$src = fopen("./src.c", "w+") or die("Unable to open file!");
-					shell_exec("rm ./prog");
-    				fwrite($src, $_POST["editor"]);
-					fclose($src); 
-					$error = shell_exec("gcc -o prog src.c 2>&1");
-					
+					$_SESSION[src] = fopen($cwd."src.c", "w+") or die("Unable to open file!");
+					shell_exec("rm ".$cwd."prog");
+    				fwrite($_SESSION[src], $_POST["editor"]);
+					fclose($_SESSION[src]); 
+					$_SESSION[status] = shell_exec("gcc -o ".$cwd."prog ".$cwd."src.c 2>&1");
+					if ($_SESSION[status] == ""){ // When compilation is succesfully done,
+						$_SESSION[stdin_file] = fopen($cwd."in.txt", "w+") or die("Unable to open file!");
+						fwrite($_SESSION[stdin_file], $_POST["stdin"]);
+						fclose($_SESSION[stdin_file]);
+						$_SESSION[stdout] = shell_exec($cwd."prog < ".$cwd."in.txt"); // Execute the program.
+					}
 				}
 			}
-  			else if(isset($_POST["execute"])){
-				$stdin = fopen("./in.txt", "w+") or die("Unable to open file!");
-				fwrite($stdin, $_POST["stdin"]);
-				fclose($stdin);
-				$stdout = shell_exec("./prog < in.txt");				
-			}	
-			$code=shell_exec("cat src.c");
-			$input=shell_exec("cat in.txt");
+			// Initiate all files.
+  			else if(isset($_POST["init"])){
+				$_SESSION[code] = "";
+				$_SESSION[status] = "";
+				$_SESSION[stdin] = "";
+				$_SESSION[stdout] = "";
+				shell_exec("rm ".$cwd."*");
+			}
 		}	
-		
 	?>
+<body>
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 	
 	<header class="w3-container w3-teal">
-  		<h1>C Compiler Web Interface</h1>
+  		<h1>
+			C Compiler Web Interface
+			<input class="w3-button w3-gray" type="submit" name="execute" value="Execute">
+			<input class="w3-button w3-gray" type="submit" name="init" value="Init">
+		</h1>
 	</header>
-	
 	<div class="w3-cell-row">
 		<div class="w3-container w3-cell">
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-			<p><!-- The Code Editor using codemirror -->	
-				<h3>CODE</h3>
-				<textarea autofocus id="editor" name="editor"><?php echo $code;?></textarea>
+			<p>
+				<h3>Code</h3>
+				<textarea autofocus id="textarea_editor" name="editor"><?php echo $_SESSION[code];?></textarea>
 			</p>
-			<p><!-- Print the status of the compilation -->
+			<p>
 				<h3>Status</h3>
-				<textarea readonly id="compile" name="status"><?php echo $error;?></textarea></p>
+				<textarea id="textarea_status" name="status"><?php echo $_SESSION[status];?></textarea>
 			</p>
-			<p>
-				<input class="w3-button w3-teal" type="submit" name="compile" value="Compile">
-			</p>
-		</div>	
-
-		<div class="`w3-container w3-cell">
- 			<p><!-- Write the stdin of the program -->
+		</div>
+		<div class="w3-container w3-cell">
+ 			<p>
 				<h3>STDIN</h3>
-				<textarea id="stdin" name="stdin"><?php echo $input;?></textarea>
+				<textarea id="textarea_stdin" name="stdin"><?php echo $_SESSION[stdin];?></textarea>
 			</p>
- 			<p><!-- Print the stdout of the program -->
+ 			<p>
 				<h3>STDOUT</h3>
-				<textarea id="stdout" name="stdout"><?php echo $stdout;?></textarea>
+				<textarea id="textarea_stdout" name="stdout"><?php echo $_SESSION[stdout];?></textarea>
 			</p>
-			<p>
-				<input class="w3-button w3-teal" type="submit" name="execute" value="Execute">
-			</p>
-			</form>
 		</div>
 	</div>
-	</body>
+
+	</form>
+</body>
+
 </html>	
 
 <script>
 	var w = window.innerWidth;
 	var h = window.innerHeight;
-	var textarea = document.getElementById('editor');
-	var editor = CodeMirror.fromTextArea(textarea, {
+	var textarea_editor = document.getElementById('textarea_editor');
+	var codemirror_editor = CodeMirror.fromTextArea(textarea_editor, {
     	lineNumbers: true,
    		//lineWrapping: true,
     	matchBrackets: true,
@@ -97,32 +110,32 @@
 		autofocus: true,
 		mode: "text/x-csrc",
     	theme: "solarized dark",
-		val: textarea.value
+		val: textarea_editor.value
 	});
-	editor.setSize(w/2, h/3);
-	var textareain = document.getElementById('stdin');
-	var stdin = CodeMirror.fromTextArea(textareain, {
+	codemirror_editor.setSize(w/2, h/3);
+	var textarea_stdin = document.getElementById('textarea_stdin');
+	var codemirror_stdin = CodeMirror.fromTextArea(textarea_stdin, {
     	lineNumbers: true,
    		//lineWrapping: true,
 		styleActiveLine: true,
 		smartIndent: false,
 		indentUnit: 4,
-		val: textareain.value
+		val: textarea_stdin.value
 	});
-	stdin.setSize(w/2, h/3);
-	var textareaerr = document.getElementById('compile');
-	var compile = CodeMirror.fromTextArea(textareaerr, {
+	codemirror_stdin.setSize(w/2, h/3);
+	var textarea_status = document.getElementById('textarea_status');
+	var codemirror_status = CodeMirror.fromTextArea(textarea_status, {
     	readOnly: "nocursor",
 		mode: "text/x-sh",
-		val: textareaerr.value
+		val: textarea_status.value
 	});
-	compile.setSize(w/2, h/3);
-	var textareaout = document.getElementById('stdout');
-	var stdout = CodeMirror.fromTextArea(textareaout, {
+	codemirror_status.setSize(w/2, h/3);
+	var textarea_stdout = document.getElementById('textarea_stdout');
+	var codemirror_stdout = CodeMirror.fromTextArea(textarea_stdout, {
     	lineNumbers: true,
    		//lineWrapping: true,
 		readOnly: true,
-		val: textareaout.value
+		val: textarea_stdout.value
 	});
-	stdout.setSize(w/2, h/3);
+	codemirror_stdout.setSize(w/2, h/3);
 </script>

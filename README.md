@@ -24,17 +24,17 @@
 		* ~~[PHP: 실행 연산자](http://php.net/manual/kr/language.operators.execution.php)~~
 		* ~~[PHP: shell_exec](http://php.net/manual/kr/function.shell-exec.php)~~
 	* 개선 사항
-		* 사이트 첫 방문시 모든 것이 초기화 상태(빈 파일)이어야 한다.
 		* 초기화 버튼 만들기
 		* ~~코드 작성 및 컴파일 후에 에디터 안에 코드가 남아있어야 한다.~~ (이태희, 2017/11/27)
-		* ~~입력 작성 및 실행 후에도 입력 안에 데이터가 남아있어야 한다.~~
-2. **2단계 : 보안 기능 추가**
+		* ~~입력 작성 및 실행 후에도 입력 안에 데이터가 남아있어야 한다.~~(이태희, 2017/11/27)
+2. **2단계 : 세션 기능 추가**
+	1. 사이트 첫 방문시 모든 것이 초기화 상태(빈 파일)이어야 한다.
+	2. 사이트 접속 종료시 남아있는 파일들을 제거해야 한다.
+		* [PHP Session](https://www.w3schools.com/php/php_sessions.asp)
+		* [Blog: Session이란?](http://88240.tistory.com/190)
+3. **3단계 : 보안 기능 추가**
 	1. Sandboxing using Docker
 		* [Easy deploy with Docker](http://blog.nacyot.com/articles/2014-01-27-easy-deploy-with-docker/)
-3. **3단계 : From Web Compiler to Web IDE** (**시간 나면 하자**)
-	1. 계정 기능
-	2. 디버깅 기능
-	3. VM 콘솔 기능
 
 ## Reference
 * [How to build an web compiler](http://hashcode.co.kr/questions/3530/%EC%9B%B9-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0)
@@ -46,6 +46,8 @@
 * [PHP: shell_exec](http://php.net/manual/kr/function.shell-exec.php)
 * 악의적인 코드를 막기 위한 Sandboxing => [Easy deploy with Docker](http://blog.nacyot.com/articles/2014-01-27-easy-deploy-with-docker/)
 * 코드를 예쁘게 보여주는 Code Highlighter => [CodeMirror](http://codemirror.net/index.html)
+* [PHP Session](https://www.w3schools.com/php/php_sessions.asp)
+* [Blog: Session이란?](http://88240.tistory.com/190)
 
 ## License
 MIT License
