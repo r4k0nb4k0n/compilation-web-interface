@@ -1,7 +1,8 @@
 <?php 
 	session_start();
 	$cwd = "./sessions/".session_id()."/";
-	$time = 60 * 10; // 10 minutes only.
+	shell_exec("mkdir ".$cwd);
+	$time = 60 * 30; // 30 minutes only.
 	if (!isset($_SESSION['EXPIRES']) || $_SESSION['EXPIRES'] < time()+$time) {
 		shell_exec("rm ".$cwd."*");
     	session_destroy();
@@ -35,16 +36,19 @@
     				$_SESSION[status] = "Code is required.";
   				} 
 				else {
-					$_SESSION[src] = fopen($cwd."src.c", "w+") or die("Unable to open file!");
+					$_SESSION[src] = fopen($cwd."src.c", "w+") or die("Unable to open src.c!");
 					shell_exec("rm ".$cwd."prog");
     				fwrite($_SESSION[src], $_POST["editor"]);
-					fclose($_SESSION[src]); 
-					$_SESSION[status] = shell_exec("gcc -o ".$cwd."prog ".$cwd."src.c 2>&1");
+					fclose($_SESSION[src]);
+					shell_exec("gcc -o ".$cwd."prog ".$cwd."src.c 2>status.txt");
+					$_SESSION[status] = shell_exec("cat status.txt");
 					if ($_SESSION[status] == ""){ // When compilation is succesfully done,
-						$_SESSION[stdin_file] = fopen($cwd."in.txt", "w+") or die("Unable to open file!");
+						$_SESSION[stdin_file] = fopen($cwd."in.txt", "w+") or die("Unable to open in.txt!");
 						fwrite($_SESSION[stdin_file], $_POST["stdin"]);
 						fclose($_SESSION[stdin_file]);
-						$_SESSION[stdout] = shell_exec($cwd."prog < ".$cwd."in.txt"); // Execute the program.
+						$tmp = shell_exec("sh exec.sh ".$cwd); // Execute the program.
+						$_SESSION[status] = $tmp."\n".shell_exec("cat ".$cwd."status.txt");
+						$_SESSION[stdout] = shell_exec("cat ".$cwd."out.txt");
 					}
 				}
 			}

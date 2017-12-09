@@ -24,14 +24,14 @@
 		* ~~[PHP: 실행 연산자](http://php.net/manual/kr/language.operators.execution.php)~~
 		* ~~[PHP: shell_exec](http://php.net/manual/kr/function.shell-exec.php)~~
 	* 개선 사항
-		* 초기화 버튼 만들기
+		* ~~초기화 버튼 만들기~~ ()
 		* ~~코드 작성 및 컴파일 후에 에디터 안에 코드가 남아있어야 한다.~~ (이태희, 2017/11/27)
 		* ~~입력 작성 및 실행 후에도 입력 안에 데이터가 남아있어야 한다.~~(이태희, 2017/11/27)
 2. **2단계 : 세션 기능 추가**
-	1. 사이트 첫 방문시 모든 것이 초기화 상태(빈 파일)이어야 한다.
-	2. 사이트 접속 종료시 남아있는 파일들을 제거해야 한다.
-		* [PHP Session](https://www.w3schools.com/php/php_sessions.asp)
-		* [Blog: Session이란?](http://88240.tistory.com/190)
+	1. ~~사이트 첫 방문시 모든 것이 초기화 상태(빈 파일)이어야 한다.~~
+	2. ~~사이트 접속 종료시 남아있는 파일들을 제거해야 한다.~~
+		* ~~[PHP Session](https://www.w3schools.com/php/php_sessions.asp)~~
+		* ~~[Blog: Session이란?](http://88240.tistory.com/190)~~
 3. **3단계 : 보안 기능 추가**
 	1. Sandboxing using Docker
 		* [Easy deploy with Docker](http://blog.nacyot.com/articles/2014-01-27-easy-deploy-with-docker/)
