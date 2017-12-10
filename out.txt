@@ -1,3 +1,0 @@
-100001 * 10001 = 1000110001
-Sandbox Root:
- > /tmp/sandbox-649

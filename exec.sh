@@ -2,7 +2,7 @@
 START=$(date +"%s")
 # do something
 # start your script work hereqqq
-timeout 5s ./mbox/src/mbox -n -i -- $1/prog<$1/in.txt 2>$1/status.txt | tail -n 100 > $1/out.txt
+timeout 5s ./mbox/src/mbox -n -i -- $1/prog<$1/in.txt 2>$1/status.txt | tail -n 50 > $1/out.txt
 # your logic ends here
 END=$(date +"%s")
 DIFF=$(( $END - $START ))
