@@ -1,4 +1,4 @@
-# 2017-2 Internet Programming Team Project : Web Compiler
+# 2017-2 Internet Programming Team Project : compilation-web-interface
 ## Collaborator
 * 2016920020 서예찬
 * 2016920041 이태희
